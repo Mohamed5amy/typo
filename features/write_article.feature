@@ -17,3 +17,9 @@ Feature: Write Articles
     Then I should see "Foobar"
     When I follow "Foobar"
     Then I should see "Lorem Ipsum"
+
+
+  Scenario: Access the categories page
+    Given I am on the admin_dashboard page
+    When  I follow "Categories"
+    Then  I should see "Categories"
