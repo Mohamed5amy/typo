@@ -245,23 +245,6 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge?    
-    return params.has_key?(:merge_with) && params.has_key?(:id) && Article.find(params[:id]).merge_with(params[:merge_with])
-    # return params.has_key?(:merge_with) && params.has_key?(:id) && Article.find(params[:id]).merge_with(2)
-    # if params.has_key?(:merge_with) && params.has_key?(:id) 
-    #     # redirect_to :action => 'index'
-    #     # return
-    #   # return true      
-    #   article = Article.find_by_id(params[:merge_with])
-    #   if !article.nil? && @article.id != article.id
-    #     @article.body = @article.body + ' ' + article.body
-    #     @article.comments << article.comments
-    #     @article.save
-    #     return true
-    #   else
-    #     return false
-    #   end
-    # else
-    #   return false
-    # end
+    return params.has_key?(:merge_with) && params.has_key?(:id) && !Article.find(params[:id]).merge_with(params[:merge_with]).nil?
   end
 end

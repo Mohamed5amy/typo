@@ -123,26 +123,14 @@ class Article < Content
   end
 
   def merge_with(other_article_id)
-    logger.info '---------------------------------------------'
-    logger.info Article.all
-    logger.info '---------------------------------------------'
-    logger.info "other_article_id: #{other_article_id}"
-    logger.info '---------------------------------------------'
-    logger.info Article.find(other_article_id)
-    logger.info '---------------------------------------------'
-    logger.info Article.find(other_article_id).id
-    logger.info '---------------------------------------------'
-    logger.info Article.find(other_article_id).body
-    logger.info '---------------------------------------------'
-    article = Article.find(other_article_id)
-    # return other_article_id
     if !article.nil? && id != article.id
       self.body = self.body + ' ' + article.body
       self.comments << article.comments
       self.save
-      return true
+      article.destroy
+      return self
     else
-      return false
+      return nil
     end
   end
 

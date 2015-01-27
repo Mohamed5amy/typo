@@ -5,7 +5,7 @@
 
 <% end %>
 
-<% if !@article.new_record? %>
+<% if !@article.nil? && !@article.new_record? %>
     <%= form_tag(form_action, :id => "#{form_type}_form", :enctype => "multipart/form-data", :class => className) do %>
 
       <%= render :partial => "merge_form" %>
