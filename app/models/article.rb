@@ -126,7 +126,10 @@ class Article < Content
     article = Article.find(other_article_id)
     if !article.nil? && id != article.id
       self.body = self.body + ' ' + article.body
-      self.comments << article.comments
+      # self.comments << article.comments
+      article.comments.each do |c|
+        c.article = self
+      end
       self.save
       article.destroy
       return self
