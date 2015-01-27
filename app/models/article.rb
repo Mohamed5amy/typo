@@ -132,9 +132,7 @@ class Article < Content
       logger.info self.comments
       logger.info '----------------------------------------------'
       article.comments.each do |c|
-        self.comments << c
-        c.article = self
-        c.save
+        c.update_attribute("article_id", self.id)
       end
       self.save
       article.destroy
