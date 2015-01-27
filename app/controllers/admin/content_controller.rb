@@ -245,6 +245,6 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge?    
-    return params.has_key?(:merge_with) && params.has_key?(:id) && @article.access_by?(current_user) && !Article.find(params[:id]).merge_with(params[:merge_with]).nil? 
+    return params.has_key?(:merge_with) && params.has_key?(:id) && current_user.admin? && !Article.find(params[:id]).merge_with(params[:merge_with]).nil? 
   end
 end
