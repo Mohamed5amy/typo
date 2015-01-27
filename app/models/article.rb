@@ -122,6 +122,30 @@ class Article < Content
 
   end
 
+  def merge_with(other_article_id)
+    logger.info '---------------------------------------------'
+    logger.info Article.all
+    logger.info '---------------------------------------------'
+    logger.info "other_article_id: #{other_article_id}"
+    logger.info '---------------------------------------------'
+    logger.info Article.find(other_article_id)
+    logger.info '---------------------------------------------'
+    logger.info Article.find(other_article_id).id
+    logger.info '---------------------------------------------'
+    logger.info Article.find(other_article_id).body
+    logger.info '---------------------------------------------'
+    article = Article.find(other_article_id)
+    # return other_article_id
+    if !article.nil? && id != article.id
+      self.body = self.body + ' ' + article.body
+      self.comments << article.comments
+      self.save
+      return true
+    else
+      return false
+    end
+  end
+
   def year_url
     published_at.year.to_s
   end
@@ -465,5 +489,5 @@ class Article < Content
     to = from + 1.day unless day.blank?
     to = to - 1 # pull off 1 second so we don't overlap onto the next day
     return from..to
-  end
+  end  
 end

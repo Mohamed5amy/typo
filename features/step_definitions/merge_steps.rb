@@ -4,6 +4,10 @@ Given /^the following articles exist:$/ do |table|
 end
 
 Then /^the article "(.*?)" should have "(.*?)"$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+  Article.find_by_title(arg1).body.should eq arg2
+end
+    
+Given /^I logged out of the admin panel$/ do
+  visit '/accounts/logout'
 end
     

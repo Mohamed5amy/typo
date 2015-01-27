@@ -147,7 +147,10 @@ class Admin::ContentController < Admin::BaseController
 
     @post_types = PostType.find(:all)
     if request.post?
-      if params[:article][:draft]
+      if merge?
+        redirect_to :action => 'index'
+        return        
+      elsif params[:article][:draft]
         get_fresh_or_existing_draft_for_article
       else
         if not @article.parent_id.nil?
@@ -239,5 +242,26 @@ class Admin::ContentController < Admin::BaseController
 
   def setup_resources
     @resources = Resource.by_created_at
+  end
+
+  def merge?    
+    return params.has_key?(:merge_with) && params.has_key?(:id) && Article.find(params[:id]).merge_with(params[:merge_with])
+    # return params.has_key?(:merge_with) && params.has_key?(:id) && Article.find(params[:id]).merge_with(2)
+    # if params.has_key?(:merge_with) && params.has_key?(:id) 
+    #     # redirect_to :action => 'index'
+    #     # return
+    #   # return true      
+    #   article = Article.find_by_id(params[:merge_with])
+    #   if !article.nil? && @article.id != article.id
+    #     @article.body = @article.body + ' ' + article.body
+    #     @article.comments << article.comments
+    #     @article.save
+    #     return true
+    #   else
+    #     return false
+    #   end
+    # else
+    #   return false
+    # end
   end
 end

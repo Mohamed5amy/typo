@@ -19,6 +19,8 @@ module NavigationHelpers
       '/admin/content/new'
     when /^the edit page of "([^"]*)"$/
       "/admin/content/edit/#{Article.find_by_title($1).id}"
+    when /^the login page$/
+      '/accounts/login'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -8,21 +8,21 @@ Feature: Merge Articles
     And I am logged into the admin panel
     And the following articles exist:
         | id | title                   | body   |
-        | 1  | Aladdin                 | Alad   |
-        | 2  | The Terminator          | Term   |
-        | 3  | When Harry Met Sally    | Harry  |
-        | 4  | The Help                | Help   |
-        | 5  | Chocolat                | Chocol |
+        | 3  | Aladdin                 | Alad   |
+        | 4  | The Terminator          | Term   |
+        | 5  | When Harry Met Sally    | Harry  |
+        | 6  | The Help                | Help   |
+        | 7  | Chocolat                | Chocol |
     
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
   Given I am on the edit page of "Aladdin"
-  When I fill in "merge_with" with "2"
+  When I fill in "merge_with" with "4"
     And I press "Merge"
-    Then the article "Aladdin" should have "Ala Term"
+    Then the article "Aladdin" should have "Alad Term"
 
   Scenario:  A non-admin cannot merge two articles
     Given I logged out of the admin panel
     When I go to the edit page of "Aladdin"
     Then I should not see "Merge"
-    And I should be on the home page
+    And I should be on the login page
