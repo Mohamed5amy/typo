@@ -127,20 +127,10 @@ class Article < Content
     if !article.nil? && id != article.id
       self.body = self.body + ' ' + article.body
       self.comments << article.comments
-      logger.info '----------------------------------------------'
-      logger.info article.comments
-      logger.info self.comments
-      logger.info '----------------------------------------------'
-      # article.comments.each do |c|
-      #   c.update_attribute("article_id", self.id)
-      # end
       self.save
+      # TAKE CARE FROM ASSOCATION CACHING
       article.comments(true)
       article.destroy
-      logger.info '----------------------------------------------'
-      logger.info article.comments
-      logger.info self.comments
-      logger.info '----------------------------------------------'
       return self
     else
       return nil
