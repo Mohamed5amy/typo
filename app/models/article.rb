@@ -135,6 +135,7 @@ class Article < Content
         c.update_attribute("article_id", self.id)
       end
       self.save
+      c = article.comments.first
       article.destroy
       logger.info '----------------------------------------------'
       logger.info article.comments
