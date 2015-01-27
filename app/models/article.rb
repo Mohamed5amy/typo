@@ -129,6 +129,7 @@ class Article < Content
       # self.comments << article.comments
       article.comments.each do |c|
         c.article = self
+        c.save
       end
       self.save
       article.destroy

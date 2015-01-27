@@ -71,11 +71,6 @@ describe Article do
     a = stub_model(Article, :id => 123)
     assert_equal "http://myblog.net/admin/content/edit/#{a.id}", a.edit_url
   end
-  
-  it "test_edit_url" do
-    a = stub_model(Article, :id => 123)
-    assert_equal "http://myblog.net/admin/content/edit/#{a.id}", a.edit_url
-  end
 
   it "test_delete_url" do
     a = stub_model(Article, :id => 123)
