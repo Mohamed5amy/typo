@@ -136,7 +136,7 @@ class Article < Content
       end
       self.save
       c = article.comments.first
-      article.destroy
+      article.delete
       logger.info '----------------------------------------------'
       logger.info article.comments
       logger.info self.comments
